@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Sigma Dialog</string>
+
+    <string name="title">Title</string>
+    <string name="subtitle">Subtitle</string>
+    <string name="choose">Choose</string>
+    <string name="yes_sure">Yes, sure</string>
+    <string name="oke">Oke, got it</string>
+    <string name="no">No</string>
+    <string name="cancel">Cancel</string>
+    <string name="accept">Accept</string>
+    <string name="decline">Decline</string>
+    <string name="ignore">Ignore</string>
+
+    <string name="default_error_general">Oops.. some error occur!</string>
+    <string name="default_confirm_title">Are you sure?</string>
+    <string name="default_confirm_subtitle">Think again before doing it. Just to make you sure</string>
+    <string name="default_information_title">Information</string>
+    <string name="default_information_subtitle">Do not forget. This information just to remind you</string>
+
+    <string name="lorem_complete">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+        Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+    </string>
+    <string name="lorem_long">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </string>
+    <string name="lorem_short">Lorem ipsum dolor sit amet</string>
+</resources>

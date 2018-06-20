@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- margin -->
+    <dimen name="margin_small">@dimen/_4sdp</dimen>
+    <dimen name="margin_medium">@dimen/_8sdp</dimen>
+    <dimen name="margin_medium_extra">@dimen/_12sdp</dimen>
+    <dimen name="margin_large">@dimen/_16sdp</dimen>
+    <dimen name="margin_large_extra">@dimen/_32sdp</dimen>
+    <!-- padding -->
+    <dimen name="padding_small">@dimen/_4sdp</dimen>
+    <dimen name="padding_medium">@dimen/_8sdp</dimen>
+    <dimen name="padding_medium_extra">@dimen/_12sdp</dimen>
+    <dimen name="padding_large">@dimen/_16sdp</dimen>
+    <dimen name="padding_large_extra">@dimen/_32sdp</dimen>
+    <!-- corner -->
+    <dimen name="corner_small">@dimen/_2sdp</dimen>
+    <dimen name="corner_medium">@dimen/_4sdp</dimen>
+    <!-- border -->
+    <dimen name="border_small">@dimen/_2sdp</dimen>
+    <dimen name="border_medium">@dimen/_4sdp</dimen>
+    <!-- elevation -->
+    <dimen name="elevation_disable">0dp</dimen>
+    <dimen name="elevation_small">@dimen/_2sdp</dimen>
+</resources>
