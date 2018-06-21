@@ -17,6 +17,8 @@ import butterknife.ButterKnife;
 
 public class ConfirmDialog extends BaseDialog {
 
+    private static final String TAG = ConfirmDialog.class.getSimpleName();
+
     private TextView mTitleTextView;
     private TextView mSubtitleTextView;
     private Button mYesButton;
@@ -39,18 +41,18 @@ public class ConfirmDialog extends BaseDialog {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBundle = this.getArguments();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_confirm, container, false);
         setUnbinder(ButterKnife.bind(this, view));
         return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mBundle = this.getArguments();
     }
 
     @Override

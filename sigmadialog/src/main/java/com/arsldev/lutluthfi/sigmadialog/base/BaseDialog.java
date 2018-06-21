@@ -32,14 +32,10 @@ public abstract class BaseDialog extends DialogFragment implements IBaseView {
     private Unbinder mUnbinder;
     private ProgressDialog mProgressDialog;
 
-    protected abstract void setupView(View view);
-
-    public void show(FragmentManager fm, String tag) {
-        FragmentTransaction ft = fm.beginTransaction();
-        Fragment prevFragment = fm.findFragmentByTag(tag);
-        if (prevFragment != null) ft.remove(prevFragment);
-        ft.addToBackStack(null);
-        show(ft, tag);
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (mContext == null) mContext = getActivity() != null ? getActivity() : getContext();
     }
 
     @NonNull
@@ -47,7 +43,7 @@ public abstract class BaseDialog extends DialogFragment implements IBaseView {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         final RelativeLayout root = new RelativeLayout(getActivity());
         root.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        final Dialog dialog = new Dialog(mContext);
+        final Dialog dialog = new Dialog(getSigmaContext());
         dialog.setCancelable(true);
         dialog.setCanceledOnTouchOutside(true);
         if (dialog.getWindow() != null) {
@@ -65,23 +61,9 @@ public abstract class BaseDialog extends DialogFragment implements IBaseView {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
-        if (mContext == null) mContext = getActivity() != null ? getActivity() : getContext();
-    }
-
-    @Override
     public void onDestroy() {
         this.mUnbinder.unbind();
         super.onDestroy();
-    }
-
-    public Context getSigmaContext() {
-        return mContext;
-    }
-
-    public void setUnbinder(Unbinder unbinder) {
-        this.mUnbinder = unbinder;
     }
 
     @Override
@@ -117,7 +99,7 @@ public abstract class BaseDialog extends DialogFragment implements IBaseView {
         if (message != null) {
             Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(mContext, getString(R.string.error_general), Toast.LENGTH_SHORT).show();
+            Toast.makeText(mContext, getString(R.string.default_error_general), Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -145,4 +127,22 @@ public abstract class BaseDialog extends DialogFragment implements IBaseView {
     public void printLog(String tag, int resId, Throwable tr) {
         Log.d(tag, getString(resId), tr);
     }
+
+    public Context getSigmaContext() {
+        return mContext;
+    }
+
+    public void setUnbinder(Unbinder unbinder) {
+        this.mUnbinder = unbinder;
+    }
+
+    public void show(FragmentManager fm, String tag) {
+        FragmentTransaction ft = fm.beginTransaction();
+        Fragment prevFragment = fm.findFragmentByTag(tag);
+        if (prevFragment != null) ft.remove(prevFragment);
+        ft.addToBackStack(null);
+        show(ft, tag);
+    }
+
+    protected abstract void setupView(View view);
 }

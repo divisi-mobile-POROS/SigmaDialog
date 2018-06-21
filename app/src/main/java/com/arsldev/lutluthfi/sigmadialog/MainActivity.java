@@ -6,11 +6,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SimpleItemAnimator;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements FeedAdapter.OnItemClickListener<String> {
+public class MainActivity extends AppCompatActivity implements FeedAdapter.OnItemClickListener<String>,
+        SigmaDialog.InformationDialogListener {
 
     private RecyclerView mRecyclerView;
     private FeedAdapter mAdapter;
@@ -40,16 +42,20 @@ public class MainActivity extends AppCompatActivity implements FeedAdapter.OnIte
 
     @Override
     public void onItemClickListener(View view, String item, int position) {
-        if (position % 2 == 0) {
-            InformationDialog.newInstance(this)
-                    .setTitle("Title of information dialog")
-                    .setSubTitle("Subtitle of information dialog")
-                    .build();
-        } else {
-            ConfirmDialog.newInstance(this)
-                    .setTitle("Title of confirm dialog")
-                    .setSubTitle("Subtitle of confirm dialog")
-                    .build();
-        }
+        Toast.makeText(this, "OnItemClick: " + item, Toast.LENGTH_SHORT).show();
+        Bundle bundle = new Bundle();
+        bundle.putString("BUNDLE_FEED", item);
+        InformationDialog.newInstance(this)
+                .setTitle("Title of information dialog")
+                .setSubTitle("Subtitle of information dialog")
+                .setBundle(bundle)
+                .build()
+                .show(getSupportFragmentManager(), InformationDialog.TAG);
+    }
+
+    @Override
+    public void onConfirmed(Bundle bundle) {
+        String feed = bundle.getString("BUNDLE_FEED");
+        Toast.makeText(this, "onConfirmed: " + feed, Toast.LENGTH_SHORT).show();
     }
 }

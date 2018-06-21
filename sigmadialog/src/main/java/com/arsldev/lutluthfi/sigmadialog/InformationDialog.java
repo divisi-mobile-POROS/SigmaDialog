@@ -4,6 +4,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.arsldev.lutluthfi.sigmadialog.utils.AppConstants;
 import butterknife.ButterKnife;
 
 public class InformationDialog extends BaseDialog {
+
+    public static final String TAG = InformationDialog.class.getSimpleName();
 
     private TextView mTitleTextView;
     private TextView mSubtitleTextView;
@@ -38,18 +41,18 @@ public class InformationDialog extends BaseDialog {
         }
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mBundle = this.getArguments();
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.dialog_information, container, false);
         setUnbinder(ButterKnife.bind(this, view));
         return view;
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        mBundle = this.getArguments();
     }
 
     @Override
@@ -66,6 +69,8 @@ public class InformationDialog extends BaseDialog {
 
         mConfirmButton.setOnClickListener(this::onConfirmButtonClick);
 
+        Log.d(TAG, mBundle.toString());
+
         String title = mBundle.getString(AppConstants.BUNDLE_TITLE);
         String subtitle = mBundle.getString(AppConstants.BUNDLE_SUBTITLE);
         mTitleTextView.setText(title != null ? title : getString(R.string.default_information_title));
@@ -74,6 +79,7 @@ public class InformationDialog extends BaseDialog {
 
     public void onConfirmButtonClick(View view) {
         mListener.onConfirmed(mBundle.getBundle(AppConstants.BUNDLE_DATA));
+        dismiss();
     }
 
     public static class Builder {
@@ -121,8 +127,8 @@ public class InformationDialog extends BaseDialog {
             return this;
         }
 
-        public ConfirmDialog build(){
-            ConfirmDialog dialog = new ConfirmDialog();
+        public InformationDialog build(){
+            InformationDialog dialog = new InformationDialog();
             dialog.setArguments(this.mArgs);
             return dialog;
         }
